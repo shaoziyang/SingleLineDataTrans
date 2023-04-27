@@ -28,7 +28,7 @@ Use any GPIO for single line data transmission between MCUs.
 
 ```
 
-Because many MCUs have fewer interfaces, it is not convenient to transmit data between them. Especially when using microsython, many devices do not support SPI/I2C slave mode, and the number of UARTs is very small, so transferring data between MCUs is subject to many limitations.
+Because many MCUs have fewer interfaces, it is not convenient to transmit data between them. Especially when using microsython, many devices do not support SPI/I2C slave mode, and the number of UARTs is very few, so transferring data between MCUs is subject to many limitations.
 
 The **SingleLineDataTrans** library provides a very simple way to transfer data between MCUs, using only one GPIO and not occupying other resources such as timers, UARTs, external interrupts, etc.
 
@@ -48,7 +48,7 @@ bit      7  6   5  4 3 2 1  0
 
 Due to differences in various systems, it is not possible to accurately predict the values of parameters. If the speed of the slave is fast enough, the bitus and charus parameters can be set smaller, otherwise the parameters needs to be set larger. When there is an error in receiving data, it is necessary to set the parameters larger.
 
-For example, when using ESP32 as a slave to receive data, you may set bitus=300 and charus=600; and when using ESP8266 as a slave to receive data, you may set bitus=3500 and charus=6500.  
+For example, when using ESP32 as a slave to receive data, you may set *bitus=300* and *charus=600*; and when using ESP8266 as a slave to receive data, you may set *bitus=3500* and *charus=6500*.  
 
 
 ## Tested platform
@@ -82,6 +82,9 @@ sldt.read()
   
 - **any**()
     Return the number of received data.
+
+- **idle()**
+    Check if the bus is in idle state, only sending data in idle state will not cause bus conflicts.
   
 - **write**(buf)
     Send data. Return the number of bytes sent.
