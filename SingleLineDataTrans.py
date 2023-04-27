@@ -48,6 +48,9 @@ class SingleLineDataTrans:
     def any(self):
         return (self._tail - self._head) % bufsize
 
+    def idle(self):
+        return (self._bcnt == 0) and (ticks_diff(ticks_us(), self._T1) > 2*self._charus)
+
     def _rxb(self, dummy):
         self._T2 = ticks_us()
         self._DT = ticks_diff(self._T2, self._T1)
